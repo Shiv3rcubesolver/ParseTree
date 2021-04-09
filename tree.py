@@ -1,24 +1,33 @@
-#looked at some code examples online and after a lot of meandering, decided to write a small 
-# module's worth  of functions to be able to operate on a list of lists like it is a tree
-#mostly based on pythonds stuff, idk if it counts as plagiarism or not, since I understand how they work
+#completely updated binary tree module, relatively simple using objects
 
-def binaryTree(value):
-    return [value,[],[]]
+class Node:
+    def __init__(self, value = None):
+        self.value = value
+        self.parent = None
+        self.left = None
+        self.right = None
 
-def insertLeft(root, value):
-    root[1] = [value, [], []]
+    def setLeftChild(self, child):
+        self.left = child 
+        child.parent = self
+        return self.left
 
-def insertRight(root, value):
-    root[2] = [value, [], []]
+    def setRightChild(self, child):
+        self.right = child
+        child.parent = self
+        return self.right
 
-def getRootValue(root):
-    return root[0]
+    def getLeftChild(self):
+        return self.left
 
-def setRootValue(root, newValue):
-    root[0] = newValue
+    def getRightChild(self):
+        return self.right
+    
+    def getRootValue(self):
+        return self.value 
 
-def getLeft(root):
-    return root[1]
+    def setRootValue(self, val):
+        self.value = val
 
-def getRight(root):
-    return root[2]
+    def getParent(self):
+        return self.parent    
