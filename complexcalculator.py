@@ -2,10 +2,7 @@
 import tree
 def buildParseTree(mathFormula):
     formula = list(mathFormula)
-    stack = []
-    parseTree = tree.binaryTree('')
-    currentNode = parseTree
-    stack.append(currentNode)
+
     for i in formula:
         if i == "(":
             tree.insertLeft(currentNode, '')

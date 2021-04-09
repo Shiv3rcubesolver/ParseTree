@@ -1,21 +1,19 @@
 #completely updated binary tree module, relatively simple using objects
 
 class Node:
-    def __init__(self, value = None):
+    def __init__(self, value = None, parent = None):
         self.value = value
-        self.parent = None
+        self.parent = parent
         self.left = None
         self.right = None
 
-    def setLeftChild(self, child):
-        self.left = child 
-        child.parent = self
+    def setLeftChild(self, val = None):
+        self.left = Node(val, self) 
         return self.left
 
-    def setRightChild(self, child):
-        self.right = child
-        child.parent = self
-        return self.right
+    def setRightChild(self, val = None):
+        self.right = Node(val, self)
+        return self.left
 
     def getLeftChild(self):
         return self.left
@@ -30,4 +28,24 @@ class Node:
         self.value = val
 
     def getParent(self):
-        return self.parent    
+        return self.parent
+    
+#decided to make a small function to create a list or values from a tree with the current node as the root node.
+#assumes that if there is only one branch from a node that that node is still considered a 
+#left or right child
+def createList(root):
+    list = [root.value]
+    if root.left is None and root.right is None:
+        return list
+
+    else: 
+        list.extend([[], []])
+
+        if root.left is not None:
+            list[1] = createList(root.left)
+
+        if root.right is not None:
+            list[2] = createList(root.right)
+    
+    return list
+    
