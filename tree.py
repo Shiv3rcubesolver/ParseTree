@@ -13,7 +13,7 @@ class Node:
 
     def setRightChild(self, val = None):
         self.right = Node(val, self)
-        return self.left
+        return self.right
 
     def getLeftChild(self):
         return self.left
