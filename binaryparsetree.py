@@ -1,5 +1,5 @@
 #Complicated calculator including a recursive descent parse function
-import tree
+import tree, operator
 def buildParseTree(mathFormula):
     formula = list(mathFormula)
     parseTree = tree.Node()
@@ -21,7 +21,26 @@ def buildParseTree(mathFormula):
                 currentNode = currentNode.getParent()
             except:
                 raise ValueError("incorrect value")
+
     return parseTree
 
-example = buildParseTree("(3+(4*5))")
-print(tree.createList(example))
+#evaluator function. feed it a tree and it will solve the tree.
+def evaluate(node):
+    ops = {"+": operator.add, "-": operator.sub, "*": operator.mul, "/": operator.truediv}
+
+    val = node.getRootValue()
+    leftC = node.getLeftChild()
+    rightC = node.getRightChild()
+    
+    if rightC and leftC and val in ops:
+        function = ops[val]
+        return function(evaluate(leftC), evaluate(rightC))
+    else:
+         return node.getRootValue()
+
+#example evaluation
+exampleFormula = "(3+(4*5))"
+print("Formula: " + exampleFormula)
+example = buildParseTree(exampleFormula)
+print("Parse tree: ", tree.createList(example))
+print("Solution:", evaluate(example))
