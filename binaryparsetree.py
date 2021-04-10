@@ -1,7 +1,6 @@
 #Complicated calculator including a recursive descent parse function
 import tree, operator
-def buildParseTree(mathFormula):
-    formula = list(mathFormula)
+def buildParseTree(formula):
     parseTree = tree.Node()
     currentNode = parseTree
     for i in formula:
